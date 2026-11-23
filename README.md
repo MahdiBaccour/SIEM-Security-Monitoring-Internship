@@ -115,9 +115,4 @@ The internship report describes a functional lab/reference deployment. It explic
 
 Prepared as a portfolio-oriented technical summary of an internship project completed in the Microsoft Azure / Microsoft Sentinel ecosystem. The diagrams and Workbook figures are selected crops from the author's internship report. The full confidential report is not included.
 
-## Before publishing publicly
 
-- [ ] Obtain written permission to publish material derived from the internship.
-- [ ] Review screenshots for tenant names, subscription IDs, user identities, IP addresses, resource IDs and other identifiers.
-- [ ] Replace environment-specific names with placeholders where appropriate.
-- [ ] Do not upload credentials, secrets, real customer logs or the confidential PDF.
