@@ -1,0 +1,25 @@
+// Windows security events
+SecurityEvent
+| where TimeGenerated > ago(15d)
+| where EventID in (4624, 4625)
+
+// Linux authentication-related Syslog events
+Syslog
+| where TimeGenerated > ago(15d)
+| where Facility in ("auth", "authpriv")
+| take 20
+
+// Microsoft Entra ID sign-ins
+SigninLogs
+| where TimeGenerated > ago(15d)
+| take 20
+
+// Microsoft Entra ID audit events
+AuditLogs
+| where TimeGenerated > ago(15d)
+| take 20
+
+// Azure subscription activity
+AzureActivity
+| where TimeGenerated > ago(15d)
+| take 20

@@ -1,0 +1,9 @@
+// Daily successful vs. non-successful Entra ID sign-ins over the last 7 days.
+SigninLogs
+| where TimeGenerated >= ago(7d)
+| extend ResultTypeStr = tostring(ResultType)
+| summarize
+    Successful = countif(ResultTypeStr == "0"),
+    Failed = countif(ResultTypeStr != "0")
+    by bin(TimeGenerated, 1d)
+| order by TimeGenerated asc

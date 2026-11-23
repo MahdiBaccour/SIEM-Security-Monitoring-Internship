@@ -1,0 +1,6 @@
+// Aggregate Entra ID sign-ins by country/region over the last 30 days.
+SigninLogs
+| where TimeGenerated > ago(30d)
+| extend CountryOrRegion = tostring(LocationDetails.countryOrRegion)
+| where isnotempty(CountryOrRegion)
+| summarize SignIns = count() by CountryOrRegion

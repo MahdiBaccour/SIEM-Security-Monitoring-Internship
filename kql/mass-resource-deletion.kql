@@ -1,0 +1,7 @@
+// Identify concentrated Azure resource deletions by the same caller.
+// Validate change windows and approved automation before treating results as suspicious.
+AzureActivity
+| where TimeGenerated > ago(1h)
+| where OperationNameValue contains "delete"
+| summarize DeleteCount = count() by Caller, bin(TimeGenerated, 10m)
+| where DeleteCount >= 5

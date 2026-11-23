@@ -1,0 +1,13 @@
+// Detect grouped Windows logon activity: >=5 failures and a later success.
+// Source: SecurityEvent. Review results as investigation leads, not proof of compromise.
+SecurityEvent
+| where TimeGenerated >= ago(1h)
+| where EventID in (4624, 4625)
+| summarize
+    FailedCount = countif(EventID == 4625),
+    SuccessCount = countif(EventID == 4624),
+    FirstFailedAttempt = minif(TimeGenerated, EventID == 4625),
+    LastSuccessAttempt = maxif(TimeGenerated, EventID == 4624)
+    by Account, Computer, IpAddress
+| where FailedCount >= 5 and SuccessCount > 0
+| where LastSuccessAttempt > FirstFailedAttempt
